@@ -1,4 +1,7 @@
-FROM node:20-alpine AS build
+ARG NODE_IMAGE=node:20-alpine
+ARG NGINX_IMAGE=nginx:alpine
+
+FROM ${NODE_IMAGE} AS build
 
 ARG NPM_REGISTRY=https://registry.npmjs.org
 
@@ -12,7 +15,7 @@ COPY public ./public
 COPY src ./src
 RUN npm run build
 
-FROM nginx:alpine
+FROM ${NGINX_IMAGE}
 
 COPY --from=build /app/dist /usr/share/nginx/html
 
