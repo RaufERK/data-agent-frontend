@@ -33,3 +33,16 @@ docker run --rm -p 5000:80 data-agent-frontend
 ```
 
 В общем запуске nginx проксирует `/api/*` в backend-сервис.
+
+Для сборки в инфраструктуре Бизнес-инкубатора нужно использовать корпоративные SberOSC/Nexus registry для базовых образов и npm-зависимостей:
+
+```bash
+docker build \
+  --build-arg NODE_IMAGE=<sberosc-node-image>:20-alpine \
+  --build-arg NGINX_IMAGE=<sberosc-nginx-image>:alpine \
+  --build-arg NPM_REGISTRY=<sberosc-npm-registry-url> \
+  --secret id=npmrc,src=.npmrc \
+  -t data-agent-frontend .
+```
+
+Файл `.npmrc` не коммитится и нужен только если корпоративный npm registry требует авторизацию.
