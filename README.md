@@ -33,3 +33,6 @@ docker run --rm -p 5000:80 data-agent-frontend
 ```
 
 В общем запуске nginx проксирует `/api/*` в backend-сервис.
+
+
+-----
