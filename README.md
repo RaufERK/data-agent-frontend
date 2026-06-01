@@ -28,7 +28,11 @@ VITE_API_URL=/api
 ## Docker
 
 ```bash
-docker build -t data-agent-frontend .
+docker build \
+  --build-arg NODE_IMAGE=<sberosc-node-image> \
+  --build-arg NGINX_IMAGE=<sberosc-nginx-image> \
+  --build-arg NPM_REGISTRY=<sberosc-npm-registry-url> \
+  -t data-agent-frontend .
 docker run --rm -p 5000:80 data-agent-frontend
 ```
 
@@ -38,8 +42,8 @@ docker run --rm -p 5000:80 data-agent-frontend
 
 ```bash
 docker build \
-  --build-arg NODE_IMAGE=<sberosc-node-image>:20-alpine \
-  --build-arg NGINX_IMAGE=<sberosc-nginx-image>:alpine \
+  --build-arg NODE_IMAGE=<sberosc-node-image> \
+  --build-arg NGINX_IMAGE=sberworks.ru/base/docker.io/nginx:1.29.3-alpine3.22 \
   --build-arg NPM_REGISTRY=<sberosc-npm-registry-url> \
   --secret id=npmrc,src=.npmrc \
   -t data-agent-frontend .
