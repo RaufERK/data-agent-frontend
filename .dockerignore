@@ -1,7 +1,5 @@
-node_modules
-dist
-.git
-.env
-.env.*
-.npmrc
-*.log
+**
+!Dockerfile
+!nginx.conf
+!index.html
+!README.md
